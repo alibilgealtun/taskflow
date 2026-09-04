@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createServerClient } from '@/lib/supabase/server';
+import { mapSupabaseError, getErrorMessage } from '@/lib/error-messages';
 import { loginSchema, registerSchema } from './schemas';
 
 export type ActionResult<T> =
@@ -44,7 +45,7 @@ export async function loginAction(
   });
 
   if (error) {
-    return { success: false, error: error.message };
+    return { success: false, error: mapSupabaseError(error.message, 'auth') };
   }
 
   revalidatePath('/', 'layout');
@@ -78,13 +79,13 @@ export async function registerAction(
   });
 
   if (error) {
-    return { success: false, error: error.message };
+    return { success: false, error: mapSupabaseError(error.message, 'auth') };
   }
 
   if (!data.session) {
     return {
       success: false,
-      error: 'Account created! Please verify your email before signing in.',
+      error: getErrorMessage('auth/email-not-confirmed'),
     };
   }
 
@@ -96,7 +97,9 @@ export async function logoutAction(): Promise<void> {
   const supabase = await createServerClient();
   const { error } = await supabase.auth.signOut();
   if (error) {
-    throw new Error(error.message);
+    // Log the error for debugging. The redirect still runs so the user
+    // reaches the login page even when the sign-out call fails.
+    console.error('Sign-out failed:', error.message);
   }
   revalidatePath('/', 'layout');
   redirect('/login');
