@@ -2,7 +2,7 @@
 
 A personal task management application I built with Next.js 16, Supabase, Tailwind CSS v4, and TypeScript.
 
-- **Live Demo**:
+- **Live Demo**: https://taskflow-lo0dt4ygs-bilge10.vercel.app/
 - **Repository**: [github.com/alibilgealtun/taskflow](https://github.com/alibilgealtun/taskflow)
 
 ## Features
