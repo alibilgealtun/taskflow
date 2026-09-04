@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/*
+ * Single source of truth for design tokens.
+ * @theme maps Tailwind color names to the CSS variables below.
+ * :root holds the light palette. .dark overrides it with the dark palette.
+ */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, var(--font-inter), 'Segoe UI',
+    sans-serif;
+
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-on-primary: var(--brand-on-primary);
+  --color-focus-ring: var(--focus-ring);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-on: var(--danger-on);
+
+  --color-elevation: var(--elevation);
+  --color-overlay: var(--overlay);
+  --color-accent-glow: var(--accent-glow);
+
+  --color-surface-bg: var(--surface-bg);
+  --color-surface-card: var(--surface-card);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-border: var(--surface-border);
+  --color-surface-border-hover: var(--surface-border-hover);
+
+  --color-status-backlog: var(--status-backlog);
+  --color-status-pending: var(--status-pending);
+  --color-status-progress: var(--status-progress);
+  --color-status-completed: var(--status-completed);
+  --color-status-cancelled: var(--status-cancelled);
+
+  --color-priority-none: var(--priority-none);
+  --color-priority-low: var(--priority-low);
+  --color-priority-medium: var(--priority-medium);
+  --color-priority-high: var(--priority-high);
+}
+
+:root {
+  color-scheme: light;
+
+  --foreground: #1d1d1f;
+  --muted-foreground: #6e6e73;
+  --subtle-foreground: #86868b;
+
+  --brand-primary: #1d1d1f;
+  --brand-hover: #000000;
+  --brand-subtle: rgba(0, 0, 0, 0.05);
+  --brand-on-primary: #ffffff;
+  --focus-ring: #007aff;
+
+  --danger: #d70015;
+  --danger-hover: #b50012;
+  --danger-fg: #b00012;
+  --danger-on: #ffffff;
+
+  --elevation: #000000;
+  --overlay: #000000;
+  --accent-glow: transparent;
+
+  /* A soft gray page keeps the light theme calm. Cards stay lighter than it. */
+  --surface-bg: #e7e7ec;
+  --surface-card: #f5f5f7;
+  --surface-elevated: #dadae1;
+  --surface-border: #c9c9d2;
+  --surface-border-hover: #a6a6b0;
+
+  --scrollbar-track: #dadae1;
+  --scrollbar-thumb: #b8b8c2;
+  --scrollbar-thumb-hover: #9a9aa4;
+
+  --status-backlog: #8e8e93;
+  --status-pending: #ff9f0a;
+  --status-progress: #007aff;
+  --status-completed: #248a3d;
+  --status-cancelled: #8e8e93;
+
+  --priority-none: #8e8e93;
+  --priority-low: #5e9f47;
+  --priority-medium: #ff9f0a;
+  --priority-high: #d70015;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --foreground: #f5f5f7;
+  --muted-foreground: #a1a1a6;
+  --subtle-foreground: #6e6e73;
+
+  --brand-primary: #f5f5f7;
+  --brand-hover: #ffffff;
+  --brand-subtle: rgba(255, 255, 255, 0.08);
+  --brand-on-primary: #000000;
+  --focus-ring: #0a84ff;
+
+  --danger: #ff453a;
+  --danger-hover: #ff6961;
+  --danger-fg: #ff6961;
+  --danger-on: #ffffff;
+
+  --elevation: #000000;
+  --overlay: #000000;
+  --accent-glow: transparent;
+
+  --surface-bg: #000000;
+  --surface-card: #1c1c1e;
+  --surface-elevated: #2c2c2e;
+  --surface-border: #38383a;
+  --surface-border-hover: #48484a;
+
+  --scrollbar-track: #1c1c1e;
+  --scrollbar-thumb: #48484a;
+  --scrollbar-thumb-hover: #636366;
+
+  --status-backlog: #8e8e93;
+  --status-pending: #ff9f0a;
+  --status-progress: #0a84ff;
+  --status-completed: #30d158;
+  --status-cancelled: #8e8e93;
+
+  --priority-none: #8e8e93;
+  --priority-low: #63c54b;
+  --priority-medium: #ff9f0a;
+  --priority-high: #ff453a;
+}
+
+body {
+  background-color: var(--surface-bg);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
