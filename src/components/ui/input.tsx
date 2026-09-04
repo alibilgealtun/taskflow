@@ -2,8 +2,8 @@ import { forwardRef, type InputHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
+  label?: string | undefined;
+  error?: string | undefined;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -21,6 +21,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={id}
+          aria-invalid={error ? 'true' : props['aria-invalid']}
+          aria-describedby={
+            error && id ? `${id}-error` : props['aria-describedby']
+          }
           className={cn(
             'flex h-10 w-full rounded-lg border bg-surface-card px-3.5 text-sm text-foreground placeholder:text-subtle-foreground transition-colors',
             'focus:outline-none focus:ring-2 focus:ring-focus-ring focus:border-transparent',
@@ -33,7 +37,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <p className="text-xs font-medium text-danger-fg mt-1">{error}</p>
+          <p
+            id={id ? `${id}-error` : undefined}
+            className="text-xs font-medium text-danger-fg mt-1"
+          >
+            {error}
+          </p>
         )}
       </div>
     );
