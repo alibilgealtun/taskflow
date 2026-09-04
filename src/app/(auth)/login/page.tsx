@@ -1,4 +1,5 @@
 import { LoginForm } from '@/features/auth/components/login-form';
+import { getErrorMessage } from '@/lib/error-messages';
 
 interface LoginPageProps {
   searchParams: Promise<{ error?: string | undefined }>;
@@ -9,9 +10,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
   let initialError: string | undefined;
   if (error === 'auth_callback_failed') {
-    initialError = 'Authentication link expired or failed. Please sign in with your email and password.';
+    initialError = getErrorMessage('auth/callback-failed');
   } else if (error) {
-    initialError = 'Authentication error. Please try again.';
+    initialError = getErrorMessage('general/unexpected');
   }
 
   return <LoginForm initialError={initialError} />;

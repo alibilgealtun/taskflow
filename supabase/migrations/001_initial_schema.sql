@@ -97,7 +97,8 @@ SET search_path = public
 AS $$
 BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM public.shared_lists WHERE id = p_share_id AND is_active = true
+    -- RETURNS TABLE makes id an output variable. The table alias prevents an ambiguous reference.
+    SELECT 1 FROM public.shared_lists sl WHERE sl.id = p_share_id AND sl.is_active = true
   ) THEN
     RAISE EXCEPTION 'share_not_found';
   END IF;
@@ -117,4 +118,5 @@ REVOKE ALL ON FUNCTION public.get_shared_tasks(uuid) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.get_shared_tasks(uuid) TO anon, authenticated;
 
 -- Enable Realtime on tasks
+ALTER TABLE public.tasks REPLICA IDENTITY FULL;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.tasks;
