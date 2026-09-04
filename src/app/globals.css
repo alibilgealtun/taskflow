@@ -68,15 +68,16 @@
   --overlay: #000000;
   --accent-glow: transparent;
 
-  --surface-bg: #f2f2f4;
-  --surface-card: #f9f9fa;
-  --surface-elevated: #e9e9ed;
-  --surface-border: #d8d8dc;
-  --surface-border-hover: #b8b8bd;
+  /* A soft gray page keeps the light theme calm. Cards stay lighter than it. */
+  --surface-bg: #e7e7ec;
+  --surface-card: #f5f5f7;
+  --surface-elevated: #dadae1;
+  --surface-border: #c9c9d2;
+  --surface-border-hover: #a6a6b0;
 
-  --scrollbar-track: #e9e9ed;
-  --scrollbar-thumb: #c7c7cc;
-  --scrollbar-thumb-hover: #a8a8ad;
+  --scrollbar-track: #dadae1;
+  --scrollbar-thumb: #b8b8c2;
+  --scrollbar-thumb-hover: #9a9aa4;
 
   --status-backlog: #8e8e93;
   --status-pending: #ff9f0a;
