@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerClient } from '@/lib/supabase/server';
 import { mapSupabaseError, getErrorMessage } from '@/lib/error-messages';
@@ -72,10 +73,14 @@ export async function registerAction(
     };
   }
 
+  const headerList = await headers();
+  const origin = headerList.get('origin');
+
   const supabase = await createServerClient();
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
+    ...(origin ? { options: { emailRedirectTo: `${origin}/auth/callback` } } : {}),
   });
 
   if (error) {
